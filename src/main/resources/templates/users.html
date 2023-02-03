@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<div>
+    <h1>All profile:</h1>
+</div>
+<body>
+<div th:insert="~{fragment :: header}"></div>
+<br>
+<table border="1">
+    <tr>
+        <th> Id</th>
+        <th> Username</th>
+        <th> FirstName</th>
+        <th> LastName</th>
+    </tr>
+    <tr th:each="userq : ${users}">
+
+        <td th:utext="${userq.getId()}"> Id</td>
+        <td th:utext="${userq.getUsername()}"> Username</td>
+        <td th:utext="${userq.getFirstName()}"> FirstName</td>
+        <td th:utext="${userq.getLastName()}"> LastName</td>
+        <td>
+            <div class="card-body">
+                <a th:href="@{/admin/edit/{id}(id=${userq.getId()})}"
+                   class="btn btn-primary"> Update </a>
+            </div>
+        </td>
+        <td>
+            <div class="card-body">
+                <a th:href="@{/admin/delete/{id}(id=${userq.getId()})}"
+                   class="btn btn-danger"> Delete </a>
+            </div>
+        </td>
+    </tr>
+</table>
+<br/>
+<div class="row">
+    <div class="col-lg-3">
+        <a th:href="@{/admin/new}" class="btn btn-primary btn-sm mb-3"> Add user</a>
+    </div>
+</div>
+</body>
+</html>

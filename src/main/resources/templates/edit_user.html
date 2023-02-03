@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+
+<body>
+<div th:insert="~{fragment :: header}"></div>
+<br>
+<div class = "container">
+    <div class = "row">
+        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class = "text-center"> Edit User </h1>
+            <div class = "card-body">
+                <form th:action="@{/admin/edit/{id}(id=${userV.getId()})}" th:object = "${userV}" method="POST">
+                    <div class="form-group">
+                        <label for="username"> Username: </label>
+                        <input  id="username"
+                                type="text"
+                                name="username"
+                                th:value="*{username}"
+                                class="form-control"
+                        />
+                    </div>
+
+                    <div class ="form-group">
+                        <label for="firstName"> First name: </label>
+                        <input  id="firstName"
+                                type = "text"
+                                name = "firstName"
+                                th:value = "*{firstName}"
+                                class = "form-control"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName"> Last name: </label>
+                        <input  id="lastName"
+                                type="text"
+                                name="lastName"
+                                th:value="*{lastName}"
+                                class="form-control"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Roles:
+                            <input type="checkbox" name="roles"
+                                   th:each="role : ${roles}"
+                                   th:text="${role.name}"
+                                   th:checked="${userV.roles.contains(role)}"
+                                   th:value="${role.id}"
+                            />
+                        </label>
+<!--                        <input th:id="${role}" type="radio" name="role" th:value="${role}">-->
+<!--                        <label th:for="${role}" th:text="${role}">Role name</label>-->
+                    </div>
+
+                    <div class = "box-footer">
+                        <button type="submit" class = "btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
